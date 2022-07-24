@@ -1,7 +1,7 @@
 terraform {
 
     backend "s3" {
-        bucket           = ""rashed-terraform-bucket-for-s34"
+        bucket           = "rashed-terraform-bucket-for-s34"
         key              = "03-basics/import-bootstrap/terraform.tfstate"
         region           = "us-east-2"
         dynamodb_table   = "terraform-state-lockingg"
@@ -201,7 +201,7 @@ resource "aws_db_instance" "db_instance"  {
     storage_type                = "standard"
     engine                      = "postgres"
     engine_version              = "12.5"
-    instances_class             = "db.t2.micro"
+    instance_class              = "db.t2.micro"
     name                        = "mydb"
     username                    = "foo"
     password                    = "foobarbaz"
