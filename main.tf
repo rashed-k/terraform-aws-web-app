@@ -56,7 +56,7 @@ resource "aws_s3_bucket" "bucket"  {
     server_side_encryption_configuration {
         rule {
             apply_server_side_encryption_by_default  {
-                see_algorithm  = "AES256"
+                sse_algorithm  = "AES256"
             }
         }
     }
@@ -86,7 +86,7 @@ resource "aws_security_group_rule" "allow_http_inbound" {
 }
 
 resource "aws_lb_listener" "http" {
-    load_balancer_arn = aws_lb.load_balancer.load_balancer_arn
+    load_balancer_arn = aws_lb.load_balancer.arn
 
     port        = 80
     protocol    = "HTTP"
@@ -123,13 +123,13 @@ resource "aws_lb_target_group" "instances"  {
 
 resource "aws_lb_target_group_attachment" "instance_1"  {
     target_group_arn        = aws_lb_target_group.instances.arn
-    target_id               = aws_instances.instances_2.id 
+    target_id               = aws_instance.instance_2.id 
     port                    = 8080
 }
 
 resource "aws_lb_target_group_attachment" "instance_2"  {
     target_group_arn        = aws_lb_target_group.instances.arn
-    target_id               = aws_instances.instances_2.id 
+    target_id               = aws_instance.instance_2.id 
     port                    = 8080
 }
 
@@ -179,12 +179,12 @@ resource "aws_security_group_rule" "allow_alb_http_outbound"  {
 }
 
 
-resource "aws_rout53_zone" "primary"  {
+resource "aws_route53_zone" "primary"  {
     name  = "funapp.click"
 }
 
 
-resource "aws_rout53_record" "root"  {
+resource "aws_route53_record" "root"  {
     zone_id = aws_route53_zone.primary.zone_id
     name    = "funapp.click"
     type    = "A"
