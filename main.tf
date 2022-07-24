@@ -1,10 +1,10 @@
 terraform {
 
     backend "s3" {
-        bucket           = "add-s3-name-here"
+        bucket           = ""rashed-terraform-bucket-for-s34"
         key              = "03-basics/import-bootstrap/terraform.tfstate"
         region           = "us-east-2"
-        dynamodb_table   = "terraform-state-locking"
+        dynamodb_table   = "terraform-state-lockingg"
         encrypt          = true
     }
 
