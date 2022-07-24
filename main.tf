@@ -89,6 +89,8 @@ resource "aws_lb_listener" "http" {
     load_balancer_arn = aws_lb.load_balancer.arn
 
     port        = 80
+
+
     protocol    = "HTTP"
 
     default_action  {
@@ -177,6 +179,14 @@ resource "aws_security_group_rule" "allow_alb_http_outbound"  {
     cidr_blocks = ["0.0.0.0/0"]
 
 }
+
+resource "aws_lb" "load_balancer" {
+    name                 = "web-app-lb"
+    load_balancer_type   = "application"
+    subnets              = data.aws_subnet_ids.default_subnet.aws_subnet_ids
+    security_groups      = [aws_security_group.alb.id]
+}
+
 
 
 resource "aws_route53_zone" "primary"  {
